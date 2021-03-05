@@ -3,7 +3,7 @@ from datetime import datetime
 import pandas as pd
 import time
 import os
-
+import requests
 
 def get_size(bytes):
     """
@@ -92,6 +92,16 @@ def construct_dataframe(processes):
     df = df[columns.split(",")]
     return df
 
+def pushgateway_post(endpoint, cpu_measure, memory_measure, input_process, input_pid):
+    #curl -X POST -H  "Content-Type: text/plain" --data "$var" http://localhost:9091/metrics/job/top/instance/machine
+    url = 'http://localhost:9091/metrics/job/top/instance/machine'
+    process_name = input_process
+    process_pid = input_pid
+    if endpoint == "":
+        endpoint_url = url
+    else:
+        endpoint_url = endpoint
+    return requests.post(endpoint_url, data ={'key':'value'}, headers = {"Content-Type": "text/plain"})
 
 if __name__ == "__main__":
     import argparse
