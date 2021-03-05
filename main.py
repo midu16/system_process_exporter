@@ -93,6 +93,17 @@ def construct_dataframe(processes):
     return df
 
 def pushgateway_post(endpoint, cpu_measure, memory_measure, input_process, input_pid):
+    """
+    The function is to export the data in a continous way to the prometheus-pushgateway. This will enable the graphical
+    representation of the metrics on the Prometheus and Grafana.
+    The advantage, is that in case of any rouge-process it will be catch by leveraging the Prometheus alertmanager.
+    :param endpoint:            Cli custom value of the enpoint. type string. <ip_addr>:<port>
+    :param cpu_measure:         The cpu[%] measure value. type float.
+    :param memory_measure:      The memory[%] measure value. type float.
+    :param input_process:       The process name. type string.
+    :param input_pid:           The pid value. type string.
+    :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
+    """
     #curl -X POST -H  "Content-Type: text/plain" --data "$var" http://localhost:9091/metrics/job/top/instance/machine
     url = 'http://localhost:9091/metrics/job/top/instance/machine'
     process_name = input_process
