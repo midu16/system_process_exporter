@@ -96,7 +96,7 @@ def construct_dataframe(processes):
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Process Viewer & Monitor")
+    parser = argparse.ArgumentParser(description="Process Viewer, Monitor & Prometheus-PushGateway exporter - Mihai Idu 2021")
     parser.add_argument("-c", "--columns", help="""Columns to show,
                                                 available are name,create_time,cores,cpu_usage,status,nice,memory_usage,read_bytes,write_bytes,n_threads,username.
                                                 Default is name,cpu_usage,memory_usage,read_bytes,write_bytes,status,create_time,nice,n_threads,cores.""",
@@ -109,8 +109,9 @@ if __name__ == "__main__":
     parser.add_argument("-u", "--live-update", action="store_true",
                         help="Whether to keep the program on and updating process information each second")
     parser.add_argument("-p", "--prometheus-pushgateway", action="store_true",
-                        help="Push the data to the Prometheus pushgateway each second")
-
+                        help="Push the data to the Prometheus pushgateway each second. Using default endpoint http://localhost:9091/metrics/job/top/instance/machine")
+    parser.add_argument("-e", "--endpoint-pushgateway", action="store_true",
+                        help="Changing the default endpoint of pushgateway. ")
 
     # parse arguments
     args = parser.parse_args()
@@ -119,6 +120,10 @@ if __name__ == "__main__":
     descending = args.descending
     n = int(args.n)
     live_update = args.live_update
+        # activating the cpu_measure and memory_measure to the pushgateway
+    prometheus_pushgateway = args.prometheus_pushgateway
+        # changing the endpoint from the default pushgateway.
+    endpoint_pushgateway = args.endpoint_pushgateway
     # print the processes for the first time
     processes = get_processes_info()
     df = construct_dataframe(processes)
@@ -138,6 +143,3 @@ if __name__ == "__main__":
         elif n > 0:
             print(df.head(n).to_string())
         time.sleep(0.7)
-
-    while live_update:
-        #
