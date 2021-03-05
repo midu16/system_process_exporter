@@ -1,4 +1,6 @@
 language: python
+ps: linux
+dist: centos7
 python:
   - "2.7"
   - "3.4"
