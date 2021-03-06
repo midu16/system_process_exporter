@@ -4,7 +4,7 @@ Prometheus pushgateway systemprocess
 
 ### Solution Architecture
 
-![LLD Solution Architecture](https://github.com/midu16/scarf_exporter/blob/main/documentation/Untitled Diagram.png)
+![LLD Solution Architecture](https://github.com/midu16/system_process_pushgateway/blob/master/documentation/Untitled%20Diagram.png)
 
 ### Introduction to the cli
 ```
@@ -43,4 +43,8 @@ optional arguments:
   .travis.yml
   ```
   
+<<<<<<< HEAD
 ### Grafana dashboard results
+=======
+### 
+>>>>>>> 4188ca235774e3ad71fe7e2893bbf48446692734
