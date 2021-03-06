@@ -43,8 +43,4 @@ optional arguments:
   .travis.yml
   ```
   
-<<<<<<< HEAD
 ### Grafana dashboard results
-=======
-### 
->>>>>>> 4188ca235774e3ad71fe7e2893bbf48446692734
