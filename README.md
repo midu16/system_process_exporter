@@ -4,7 +4,7 @@ Prometheus pushgateway systemprocess
 
 ### Solution Architecture
 
-![LLD Solution Architecture](https://github.com/midu16/scarf_exporter/blob/main/documentation/Untitled Diagram.png)
+![LLD Solution Architecture](https://github.com/midu16/system_process_pushgateway/blob/master/documentation/Untitled%20Diagram.png)
 
 ### Introduction to the cli
 ```
