@@ -6,6 +6,10 @@ Prometheus pushgateway systemprocess
 
 ![LLD Solution Architecture](https://github.com/midu16/system_process_pushgateway/blob/master/documentation/Untitled%20Diagram.png)
 
+The transmission interval of the data for the interface ```(1)``` is each second.
+The data flow is from the ```systemprocess_exporter``` towards ```pushgateway```, triggered by the ```POST```method sent by ```systemprocess_exporter```.
+
+The transmission interval of the data for the interface ```(2)``` is dependent by the ```scrape_interval``` parameter set into the ```prometheus.yml```. The data flow is from the ```pushgateway``` towards ```prometheus```, triggered by the ```GET```method request from ```prometheus```. 
 ### Introduction to the cli
 ```
 midu@localhost $ python3 main.py -h       
