@@ -83,16 +83,38 @@ def construct_dataframe(processes):
     # sort rows by the column passed as argument
     df.sort_values(sort_by, inplace=True, ascending=not descending)
     # pretty printing bytes
-    df['memory_usage'] = df['memory_usage'].apply(get_size)
-    df['write_bytes'] = df['write_bytes'].apply(get_size)
-    df['read_bytes'] = df['read_bytes'].apply(get_size)
+    df['memory_usage'] = df['memory_usage']#.apply(get_size)
+    df['write_bytes'] = df['write_bytes']#.apply(get_size)
+    df['read_bytes'] = df['read_bytes']#.apply(get_size)
     # convert to proper date format
     df['create_time'] = df['create_time'].apply(datetime.strftime, args=("%Y-%m-%d %H:%M:%S",))
     # reorder and define used columns
     df = df[columns.split(",")]
     return df
 
-def pushgateway_post(endpoint, cpu_measure, memory_measure, input_process, input_pid):
+def memory_pushgateway_post(endpoint, memory_measure, input_process, input_pid):
+    """
+        The function is to export the data in a continous way to the prometheus-pushgateway. This will enable the
+    graphical representation of the metrics on the Prometheus and Grafana.
+        The advantage, is that in case of any rouge-process it will be catch by leveraging the Prometheus alertmanager.
+    :param endpoint:            Cli custom value of the enpoint. type string. <ip_addr>:<port>
+    :param cpu_measure:         The cpu[%] measure value. type float.
+    :param memory_measure:      The memory[%] measure value. type float.
+    :param input_process:       The process name. type string.
+    :param input_pid:           The pid value. type string.
+    :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
+    """
+    #curl -X POST -H  "Content-Type: text/plain" --data "$var" http://localhost:9091/metrics/job/top/instance/machine
+    url = 'http://localhost:9091/metrics/job/top/instance/machine'
+    process_name = input_process
+    process_pid = input_pid
+    if endpoint == "":
+        endpoint_url = url
+    else:
+        endpoint_url = endpoint
+    return requests.post(endpoint_url, data ={'key':'value'}, headers = {"Content-Type": "text/plain"})
+
+def cpu_pushgateway_post(endpoint, cpu_measure, input_process, input_pid):
     """
         The function is to export the data in a continous way to the prometheus-pushgateway. This will enable the
     graphical representation of the metrics on the Prometheus and Grafana.
@@ -164,3 +186,23 @@ if __name__ == "__main__":
         elif n > 0:
             print(df.head(n).to_string())
         time.sleep(0.7)
+    while prometheus_pushgateway:
+        # get all process info
+        processes = get_processes_info()
+        df = construct_dataframe(processes)
+        df_name = df['name']
+        df_cpu_usage = df['cpu_usage']
+        df_memory_usage = df['memory_usage']
+        df = df['memory_usage']
+        # selecting the indexing column which is "pid"
+        pid = df.index
+        # printing the pid value of the 6th process
+        #print(pid[5])
+        #print("Total number of process: "+str(len(pid)))
+        #index = 5
+        for index in range(1,len(pid)):
+            print("{" + "cpu_usage" + "{" + "process=" + str(df_name[pid[index]]) + "," + "pid=" + str(
+                pid[index]) + "}" + "," + str(df_cpu_usage[pid[index]]) + "}")
+            print("{" + "memory_usage" + "{" + "process=" + str(df_name[pid[index]]) + "," + "pid=" + str(
+                pid[index]) + "}" + "," + str(df_memory_usage[pid[index]]) + "}")
+        time.sleep(0.5)
