@@ -92,49 +92,56 @@ def construct_dataframe(processes):
     df = df[columns.split(",")]
     return df
 
-def memory_pushgateway_post(endpoint, memory_measure, input_process, input_pid):
+def memory_usage_data_payload(memory_measure, input_process, input_pid):
     """
-        The function is to export the data in a continous way to the prometheus-pushgateway. This will enable the
-    graphical representation of the metrics on the Prometheus and Grafana.
-        The advantage, is that in case of any rouge-process it will be catch by leveraging the Prometheus alertmanager.
-    :param endpoint:            Cli custom value of the enpoint. type string. <ip_addr>:<port>
-    :param cpu_measure:         The cpu[%] measure value. type float.
+        This fucntion is building the payload of the post method to the pushgateway-server.
     :param memory_measure:      The memory[%] measure value. type float.
     :param input_process:       The process name. type string.
     :param input_pid:           The pid value. type string.
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
     """
-    #curl -X POST -H  "Content-Type: text/plain" --data "$var" http://localhost:9091/metrics/job/top/instance/machine
-    url = 'http://localhost:9091/metrics/job/top/instance/machine'
     process_name = input_process
     process_pid = input_pid
-    if endpoint == "":
-        endpoint_url = url
-    else:
-        endpoint_url = endpoint
-    return requests.post(endpoint_url, data ={'key':'value'}, headers = {"Content-Type": "text/plain"})
+    memory_measure = memory_measure
+    key ="memory_usage" + "{" + "process=" + '"' + str(process_name) + '"' +" , " + "pid=" + '"' + str(
+               process_pid) + '"' + "}"
+    value = float(memory_measure)
+    #print("%s %s\n" % (key, value))
+    memory_usage = "%s %s\n" % (key, value)
+    return memory_usage
 
-def cpu_pushgateway_post(endpoint, cpu_measure, input_process, input_pid):
-    """
-        The function is to export the data in a continous way to the prometheus-pushgateway. This will enable the
-    graphical representation of the metrics on the Prometheus and Grafana.
-        The advantage, is that in case of any rouge-process it will be catch by leveraging the Prometheus alertmanager.
+
+# building the pushgateway_post function
+def pushgateway_post(endpoint, data):
+    """"
+        The function is transporing the payload to the designated endpoint.
     :param endpoint:            Cli custom value of the enpoint. type string. <ip_addr>:<port>
+    :param data:                The data-payload to be transporter
+    :return:                    The return is a REST-API POST call to the prometheus-pushgateway-server endpoint.
+    """
+    #curl -X POST -H  "Content-Type: text/plain" --data "$var" http://localhost:9091/metrics/job/top/instance/machine
+    url = 'http://'+str(endpoint)+'/metrics/job/top/instance/machine'
+    #print(url)
+    data = data
+    headers = {'X-Requested-With': 'Python requests', 'Content-type': 'text/xml'}
+    return requests.post(url, data='%s' % data, headers=headers)
+
+def cpu_usage_data_payload(cpu_measure, input_process, input_pid):
+    """
+
+
     :param cpu_measure:         The cpu[%] measure value. type float.
     :param memory_measure:      The memory[%] measure value. type float.
     :param input_process:       The process name. type string.
     :param input_pid:           The pid value. type string.
-    :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
+    :return:                    The cpu_measure data-payload
     """
     #curl -X POST -H  "Content-Type: text/plain" --data "$var" http://localhost:9091/metrics/job/top/instance/machine
-    url = 'http://localhost:9091/metrics/job/top/instance/machine'
+    url = 'http://'+str(endpoint)+'/metrics/job/top/instance/machine'
+    print(url)
     process_name = input_process
     process_pid = input_pid
-    if endpoint == "":
-        endpoint_url = url
-    else:
-        endpoint_url = endpoint
-    return requests.post(endpoint_url, data ={'key':'value'}, headers = {"Content-Type": "text/plain"})
+    return requests.post(url, data ={'key':'value'}, headers = {"Content-Type": "text/plain"})
 
 if __name__ == "__main__":
     import argparse
@@ -148,13 +155,14 @@ if __name__ == "__main__":
                         default="memory_usage")
     parser.add_argument("--descending", action="store_true", help="Whether to sort in descending order.")
     parser.add_argument("-n", help="Number of processes to show, will show all if 0 is specified, default is 25 .",
-                        default=25)
+                        default=100)
     parser.add_argument("-u", "--live-update", action="store_true",
                         help="Whether to keep the program on and updating process information each second")
-    parser.add_argument("-p", "--prometheus-pushgateway", action="store_true",
+    parser.add_argument("-pp", "--prometheus-pushgateway", action="store_true",
                         help="Push the data to the Prometheus pushgateway each second. Using default endpoint http://localhost:9091/metrics/job/top/instance/machine")
-    parser.add_argument("-e", "--endpoint-pushgateway", action="store_true",
-                        help="Changing the default endpoint of pushgateway. ")
+    parser.add_argument("-e", "--pushgateway-server-ipaddr", type=str, default="localhost",
+                        help="Changing the localhost pudshgateway-server IPaddr. ")
+    parser.add_argument("-p", "--pushgateway-server-port", type=str, default="9091", help="Changing the pushgateway-server port.")
 
     # parse arguments
     args = parser.parse_args()
@@ -165,8 +173,10 @@ if __name__ == "__main__":
     live_update = args.live_update
         # activating the cpu_measure and memory_measure to the pushgateway
     prometheus_pushgateway = args.prometheus_pushgateway
-        # changing the endpoint from the default pushgateway.
-    endpoint_pushgateway = args.endpoint_pushgateway
+        # changing the IPaddr of  pushgateway-server.
+    pushgateway_server_ip_addr = str(args.pushgateway_server_ipaddr)
+        # changing the port communication of the default pushgateway-server.
+    pushgateway_server_port = str(args.pushgateway_server_port)
     # print the processes for the first time
     processes = get_processes_info()
     df = construct_dataframe(processes)
@@ -195,14 +205,21 @@ if __name__ == "__main__":
         df_memory_usage = df['memory_usage']
         df = df['memory_usage']
         # selecting the indexing column which is "pid"
-        pid = df.index
+        ##pid = df.index
         # printing the pid value of the 6th process
         #print(pid[5])
-        #print("Total number of process: "+str(len(pid)))
-        #index = 5
-        for index in range(1,len(pid)):
-            print("{" + "cpu_usage" + "{" + "process=" + str(df_name[pid[index]]) + "," + "pid=" + str(
-                pid[index]) + "}" + "," + str(df_cpu_usage[pid[index]]) + "}")
-            print("{" + "memory_usage" + "{" + "process=" + str(df_name[pid[index]]) + "," + "pid=" + str(
-                pid[index]) + "}" + "," + str(df_memory_usage[pid[index]]) + "}")
-        time.sleep(0.5)
+        if n == 0:
+            pid = df.index
+        elif n > 0:
+            pid = df.head(n).index
+        #print("Total number of process on the system: "+str(len(pid)))
+        #
+        endpoint_pushgateway = str(pushgateway_server_ip_addr)+":"+str(pushgateway_server_port)
+        memory_usage_payload = []
+        index=0
+        for index in range(0,len(pid)):
+            memory_usage_payload = memory_usage_data_payload(df_memory_usage[pid[index]], df_name[pid[index]], pid[index])
+            print(index)
+            print(memory_usage_payload)
+            pushgateway_post(endpoint_pushgateway, memory_usage_payload)
+            time.sleep(2)
