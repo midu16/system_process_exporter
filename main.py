@@ -110,6 +110,23 @@ def memory_usage_data_payload(memory_measure, input_process, input_pid):
     memory_usage = "%s %s\n" % (key, value)
     return memory_usage
 
+def cpu_usage_data_payload(cpu_measure, input_process, input_pid):
+    """
+    :param cpu_measure:         The cpu[%] measure value. type float.
+    :param memory_measure:      The memory[%] measure value. type float.
+    :param input_process:       The process name. type string.
+    :param input_pid:           The pid value. type string.
+    :return:                    The cpu_measure data-payload
+    """
+    process_name = input_process
+    process_pid = input_pid
+    cpu_measure = cpu_measure
+    key ="cpu_usage" + "{" + "process=" + '"' + str(process_name) + '"' +" , " + "pid=" + '"' + str(
+               process_pid) + '"' + "}"
+    value = float(cpu_measure)
+    #print("%s %s\n" % (key, value))
+    cpu_usage = "%s %s\n" % (key, value)
+    return cpu_usage
 
 # building the pushgateway_post function
 def pushgateway_post(endpoint, data):
@@ -126,22 +143,6 @@ def pushgateway_post(endpoint, data):
     headers = {'X-Requested-With': 'Python requests', 'Content-type': 'text/xml'}
     return requests.post(url, data='%s' % data, headers=headers)
 
-def cpu_usage_data_payload(cpu_measure, input_process, input_pid):
-    """
-
-
-    :param cpu_measure:         The cpu[%] measure value. type float.
-    :param memory_measure:      The memory[%] measure value. type float.
-    :param input_process:       The process name. type string.
-    :param input_pid:           The pid value. type string.
-    :return:                    The cpu_measure data-payload
-    """
-    #curl -X POST -H  "Content-Type: text/plain" --data "$var" http://localhost:9091/metrics/job/top/instance/machine
-    url = 'http://'+str(endpoint)+'/metrics/job/top/instance/machine'
-    print(url)
-    process_name = input_process
-    process_pid = input_pid
-    return requests.post(url, data ={'key':'value'}, headers = {"Content-Type": "text/plain"})
 
 if __name__ == "__main__":
     import argparse
@@ -217,9 +218,11 @@ if __name__ == "__main__":
         endpoint_pushgateway = str(pushgateway_server_ip_addr)+":"+str(pushgateway_server_port)
         memory_usage_payload = []
         index=0
-        for index in range(0,len(pid)):
+        #for index in range(0,len(pid)):
+        while index < len(pid):
             memory_usage_payload = memory_usage_data_payload(df_memory_usage[pid[index]], df_name[pid[index]], pid[index])
             print(index)
             print(memory_usage_payload)
             pushgateway_post(endpoint_pushgateway, memory_usage_payload)
-            time.sleep(2)
+            time.sleep(0.5)
+            index +=1
