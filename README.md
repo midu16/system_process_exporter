@@ -1,5 +1,5 @@
 # Linux system process monitoring and exporter to Prometheus and Grafana
-Prometheus pushgateway systemprocess 
+Prometheus systemprocess_exporter 
 
 
 ### Solution Architecture
@@ -10,6 +10,7 @@ The transmission interval of the data for the interface ```(1)``` is each second
 The data flow is from the ```systemprocess_exporter``` towards ```pushgateway```, triggered by the ```POST```method sent by ```systemprocess_exporter```.
 
 The transmission interval of the data for the interface ```(2)``` is dependent by the ```scrape_interval``` parameter set into the ```prometheus.yml```. The data flow is from the ```pushgateway``` towards ```prometheus```, triggered by the ```GET```method request from ```prometheus```. 
+
 ### Introduction to the cli
 ```
 midu@localhost $ python3 main.py -h       
@@ -48,3 +49,13 @@ optional arguments:
   ```
   
 ### Grafana dashboard results
+TBD
+
+
+
+### Progress
+* [x] Building the export functions
+* [x] Exporting data to ```pushgateway```
+* [ ] Generic Grafana dashboard
+* [ ] Defining Prometheus-alertmanager alarm thresholds
+* [ ] Building .rpm package
