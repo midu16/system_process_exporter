@@ -49,7 +49,8 @@ optional arguments:
   ```
   
 ### Grafana dashboard results
-TBD
+The following picture is presenting a set of data samples results for *java* process:
+![Grafana results](https://github.com/midu16/systemprocess_exporter/blob/master/documentation/Screenshot_2021-03-10%20SystemProcess%20Usage%20-%20Grafana.png)
 
 
 ### Testing capabilities
