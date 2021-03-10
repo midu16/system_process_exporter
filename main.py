@@ -18,9 +18,6 @@ def memory_usage_data_payload(username):
     process_dict = {"memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
         proc.pid) + '"' + "}": proc.memory_percent(memtype="rss") for proc in psutil.process_iter() if
                     proc.username() == username}
-    process_cpu_dict = {proc.pid: proc.cpu_percent(interval=None) for proc in psutil.process_iter() if
-                        proc.username() == username}
-
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
