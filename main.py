@@ -1,132 +1,67 @@
-import psutil
-from datetime import datetime
-import pandas as pd
-import time
-import os
+"""
+This is the systemprocess_exporter ephemeral exporter of process cpu, memory and disk usage per process.
+"""
+__author__ = 'Mihai IDU'
+
 import requests
+import time
+import psutil,getpass,os
+import argparse
 
-def get_size(bytes):
-    """
-    Returns size of bytes in a nice format
-    """
-    for unit in ['', 'K', 'M', 'G', 'T', 'P']:
-        if bytes < 1024:
-            return f"{bytes:.2f}{unit}B"
-        bytes /= 1024
-
-
-def get_processes_info():
-    # the list the contain all process dictionaries
-    processes = []
-    for process in psutil.process_iter():
-        # get all process info in one shot
-        with process.oneshot():
-            # get the process id
-            pid = process.pid
-            if pid == 0:
-                # System Idle Process for Windows NT, useless to see anyways
-                continue
-            # get the name of the file executed
-            name = process.name()
-            # get the time the process was spawned
-            try:
-                create_time = datetime.fromtimestamp(process.create_time())
-            except OSError:
-                # system processes, using boot time instead
-                create_time = datetime.fromtimestamp(psutil.boot_time())
-            try:
-                # get the number of CPU cores that can execute this process
-                cores = len(process.cpu_affinity())
-            except psutil.AccessDenied:
-                cores = 0
-            # get the CPU usage percentage
-            cpu_usage = process.cpu_percent()
-            # get the status of the process (running, idle, etc.)
-            status = process.status()
-            try:
-                # get the process priority (a lower value means a more prioritized process)
-                nice = int(process.nice())
-            except psutil.AccessDenied:
-                nice = 0
-            try:
-                # get the memory usage in bytes
-                memory_usage = process.memory_full_info().uss
-            except psutil.AccessDenied:
-                memory_usage = 0
-            # total process read and written bytes
-            io_counters = process.io_counters()
-            read_bytes = io_counters.read_bytes
-            write_bytes = io_counters.write_bytes
-            # get the number of total threads spawned by this process
-            n_threads = process.num_threads()
-            # get the username of user spawned the process
-            try:
-                username = process.username()
-            except psutil.AccessDenied:
-                username = "N/A"
-
-        processes.append({
-            'pid': pid, 'name': name, 'create_time': create_time,
-            'cores': cores, 'cpu_usage': cpu_usage, 'status': status, 'nice': nice,
-            'memory_usage': memory_usage, 'read_bytes': read_bytes, 'write_bytes': write_bytes,
-            'n_threads': n_threads, 'username': username,
-        })
-
-    return processes
-
-
-def construct_dataframe(processes):
-    # convert to pandas dataframe
-    df = pd.DataFrame(processes)
-    # set the process id as index of a process
-    df.set_index('pid', inplace=True)
-    # sort rows by the column passed as argument
-    df.sort_values(sort_by, inplace=True, ascending=not descending)
-    # pretty printing bytes
-    df['memory_usage'] = df['memory_usage']#.apply(get_size)
-    df['write_bytes'] = df['write_bytes']#.apply(get_size)
-    df['read_bytes'] = df['read_bytes']#.apply(get_size)
-    # convert to proper date format
-    df['create_time'] = df['create_time'].apply(datetime.strftime, args=("%Y-%m-%d %H:%M:%S",))
-    # reorder and define used columns
-    df = df[columns.split(",")]
-    return df
-
-def memory_usage_data_payload(memory_measure, input_process, input_pid):
+def memory_usage_data_payload(username):
     """
         This fucntion is building the payload of the post method to the pushgateway-server.
-    :param memory_measure:      The memory[%] measure value. type float.
-    :param input_process:       The process name. type string.
-    :param input_pid:           The pid value. type string.
+
+    :param username:            The username of the user under which the systemprocess_exporter runs.
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
     """
-    process_name = input_process
-    process_pid = input_pid
-    memory_measure = memory_measure
-    key ="memory_usage" + "{" + "process=" + '"' + str(process_name) + '"' +" , " + "pid=" + '"' + str(
-               process_pid) + '"' + "}"
-    value = float(memory_measure)
-    #print("%s %s\n" % (key, value))
-    memory_usage = "%s %s\n" % (key, value)
-    return memory_usage
+    process_dict = {"memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
+        proc.pid) + '"' + "}": proc.memory_percent(memtype="rss") for proc in psutil.process_iter() if
+                    proc.username() == username}
+    process_cpu_dict = {proc.pid: proc.cpu_percent(interval=None) for proc in psutil.process_iter() if
+                        proc.username() == username}
 
-def cpu_usage_data_payload(cpu_measure, input_process, input_pid):
     """
-    :param cpu_measure:         The cpu[%] measure value. type float.
-    :param memory_measure:      The memory[%] measure value. type float.
-    :param input_process:       The process name. type string.
-    :param input_pid:           The pid value. type string.
+        Make sure that the key is of type str. Is generated as dictionary.
+            Make sure that the value is of type float. Is generated as dictionary.
+    """
+    key = []
+    for index in process_dict.keys():
+        key.append(str(index))
+
+    value = []
+    for index in process_dict.values():
+        value.append(str(round(index, 2)))
+
+    data = []
+    for index in range(0, len(process_dict.keys())):
+        data.append(str(key[index]) + ' ' + str(value[index]) + '\n')
+    return data
+
+def cpu_usage_data_payload(username):
+    """
+    :param username:            The username of the user under which the systemprocess_exporter runs.
     :return:                    The cpu_measure data-payload
     """
-    process_name = input_process
-    process_pid = input_pid
-    cpu_measure = cpu_measure
-    key ="cpu_usage" + "{" + "process=" + '"' + str(process_name) + '"' +" , " + "pid=" + '"' + str(
-               process_pid) + '"' + "}"
-    value = float(cpu_measure)
-    #print("%s %s\n" % (key, value))
-    cpu_usage = "%s %s\n" % (key, value)
-    return cpu_usage
+    process_dict = {"cpu_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
+        proc.pid) + '"' + "}": proc.cpu_percent(interval=None) for proc in psutil.process_iter() if
+                    proc.username() == username}
+    """
+        Make sure that the key is of type str. Is generated as dictionary.
+            Make sure that the value is of type float. Is generated as dictionary.
+    """
+    key = []
+    for index in process_dict.keys():
+        key.append(str(index))
+
+    value = []
+    for index in process_dict.values():
+        value.append(str(round(index, 2)))
+
+    data = []
+    for index in range(0, len(process_dict.keys())):
+        data.append(str(key[index]) + ' ' + str(value[index]) + '\n')
+    return data
 
 # building the pushgateway_post function
 def pushgateway_post(endpoint, data):
@@ -138,91 +73,35 @@ def pushgateway_post(endpoint, data):
     """
     #curl -X POST -H  "Content-Type: text/plain" --data "$var" http://localhost:9091/metrics/job/top/instance/machine
     url = 'http://'+str(endpoint)+'/metrics/job/top/instance/machine'
-    #print(url)
-    data = data
     headers = {'X-Requested-With': 'Python requests', 'Content-type': 'text/xml'}
+    time.sleep(0.5)
     return requests.post(url, data='%s' % data, headers=headers)
 
+#list to plain text function conversion for better
+def fun(data):
+    return "".join([str(item) for var in data for item in var])
 
 if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(description="Process Viewer, Monitor & Prometheus-PushGateway exporter - Mihai Idu 2021")
-    parser.add_argument("-c", "--columns", help="""Columns to show,
-                                                available are name,create_time,cores,cpu_usage,status,nice,memory_usage,read_bytes,write_bytes,n_threads,username.
-                                                Default is name,cpu_usage,memory_usage,read_bytes,write_bytes,status,create_time,nice,n_threads,cores.""",
-                        default="name,cpu_usage,memory_usage,read_bytes,write_bytes,status,create_time,nice,n_threads,cores")
-    parser.add_argument("-s", "--sort-by", dest="sort_by", help="Column to sort by, default is memory_usage .",
-                        default="memory_usage")
-    parser.add_argument("--descending", action="store_true", help="Whether to sort in descending order.")
-    parser.add_argument("-n", help="Number of processes to show, will show all if 0 is specified, default is 25 .",
-                        default=100)
-    parser.add_argument("-u", "--live-update", action="store_true",
-                        help="Whether to keep the program on and updating process information each second")
+    parser = argparse.ArgumentParser(
+        description="Process Viewer, Monitor & Prometheus-PushGateway exporter - Mihai Idu 2021")
     parser.add_argument("-pp", "--prometheus-pushgateway", action="store_true",
                         help="Push the data to the Prometheus pushgateway each second. Using default endpoint http://localhost:9091/metrics/job/top/instance/machine")
     parser.add_argument("-e", "--pushgateway-server-ipaddr", type=str, default="localhost",
                         help="Changing the localhost pudshgateway-server IPaddr. ")
-    parser.add_argument("-p", "--pushgateway-server-port", type=str, default="9091", help="Changing the pushgateway-server port.")
-
-    # parse arguments
+    parser.add_argument("-p", "--pushgateway-server-port", type=str, default="9091",
+                        help="Changing the pushgateway-server port.")
+    # managing the arguments
     args = parser.parse_args()
-    columns = args.columns
-    sort_by = args.sort_by
-    descending = args.descending
-    n = int(args.n)
-    live_update = args.live_update
-        # activating the cpu_measure and memory_measure to the pushgateway
     prometheus_pushgateway = args.prometheus_pushgateway
-        # changing the IPaddr of  pushgateway-server.
+    # changing the IPaddr of  pushgateway-server.
     pushgateway_server_ip_addr = str(args.pushgateway_server_ipaddr)
-        # changing the port communication of the default pushgateway-server.
+    # changing the port communication of the default pushgateway-server.
     pushgateway_server_port = str(args.pushgateway_server_port)
     # print the processes for the first time
-    processes = get_processes_info()
-    df = construct_dataframe(processes)
-    if n == 0:
-        print(df.to_string())
-    elif n > 0:
-        print(df.head(n).to_string())
-    # print continuously
-    while live_update:
-        # get all process info
-        processes = get_processes_info()
-        df = construct_dataframe(processes)
-        # clear the screen depending on your OS
-        os.system("cls") if "nt" in os.name else os.system("clear")
-        if n == 0:
-            print(df.to_string())
-        elif n > 0:
-            print(df.head(n).to_string())
-        time.sleep(0.7)
     while prometheus_pushgateway:
-        # get all process info
-        processes = get_processes_info()
-        df = construct_dataframe(processes)
-        df_name = df['name']
-        df_cpu_usage = df['cpu_usage']
-        df_memory_usage = df['memory_usage']
-        df = df['memory_usage']
-        # selecting the indexing column which is "pid"
-        ##pid = df.index
-        # printing the pid value of the 6th process
-        #print(pid[5])
-        if n == 0:
-            pid = df.index
-        elif n > 0:
-            pid = df.head(n).index
-        #print("Total number of process on the system: "+str(len(pid)))
-        #
-        endpoint_pushgateway = str(pushgateway_server_ip_addr)+":"+str(pushgateway_server_port)
-        memory_usage_payload = []
-        index=0
-        #for index in range(0,len(pid)):
-        while index < len(pid):
-            memory_usage_payload = memory_usage_data_payload(df_memory_usage[pid[index]], df_name[pid[index]], pid[index])
-            print(index)
-            print(memory_usage_payload)
-            pushgateway_post(endpoint_pushgateway, memory_usage_payload)
-            time.sleep(0.5)
-            index +=1
+        endpoint_pushgateway = str(pushgateway_server_ip_addr) + ":" + str(pushgateway_server_port)
+    # calling the actions
+        user_name = getpass.getuser()
+        pushgateway_post(endpoint_pushgateway,fun(memory_usage_data_payload(user_name)))
+        pushgateway_post(endpoint_pushgateway,fun(cpu_usage_data_payload(user_name)))
+

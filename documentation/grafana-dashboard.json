@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 15,
-  "iteration": 1615323073574,
+  "iteration": 1615412781932,
   "links": [],
   "panels": [
     {
@@ -35,8 +35,8 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 13,
-        "w": 24,
+        "h": 10,
+        "w": 11,
         "x": 0,
         "y": 0
       },
@@ -68,9 +68,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(10,{exported_instance=\"machine\",exported_job=\"top\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
+          "expr": "topk(10,memory_usage{exported_instance=\"machine\",exported_job=\"top\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
+          "instant": false,
           "interval": "",
-          "legendFormat": "$process",
+          "intervalFactor": 1,
+          "legendFormat": "$process ",
           "refId": "A"
         }
       ],
@@ -95,11 +97,12 @@
       },
       "yaxes": [
         {
-          "format": "decbytes",
-          "label": null,
+          "decimals": null,
+          "format": "percent",
+          "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
+          "max": "100",
+          "min": "0",
           "show": true
         },
         {
@@ -132,10 +135,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 13,
-        "w": 24,
-        "x": 0,
-        "y": 13
+        "h": 10,
+        "w": 13,
+        "x": 11,
+        "y": 0
       },
       "hiddenSeries": false,
       "id": 3,
@@ -165,7 +168,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(10,{exported_instance=\"machine\",exported_job=\"top\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
+          "expr": "topk(10,cpu_usage{exported_instance=\"machine\",exported_job=\"top\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
+          "instant": false,
           "interval": "",
           "legendFormat": "$process",
           "refId": "A"
@@ -192,11 +196,12 @@
       },
       "yaxes": [
         {
-          "format": "decbytes",
+          "decimals": null,
+          "format": "percent",
           "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
+          "max": "100",
+          "min": "0",
           "show": true
         },
         {
@@ -214,7 +219,7 @@
       }
     }
   ],
-  "refresh": "30s",
+  "refresh": "5s",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [],
@@ -224,8 +229,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "java",
-          "value": "java"
+          "text": "python3",
+          "value": "python3"
         },
         "datasource": "Prometheus",
         "definition": "label_values(memory_usage{job=\"prometheus\"}, process)",
@@ -246,16 +251,43 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "11595",
+          "value": "11595"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(memory_usage{job=\"prometheus\"}, pid)",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "pid",
+        "multi": false,
+        "name": "pid",
+        "options": [],
+        "query": "label_values(memory_usage{job=\"prometheus\"}, pid)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
-  "timezone": "",
-  "title": "New dashboard Copy",
+  "timezone": "browser",
+  "title": "SystemProcess Usage",
   "uid": "Yvtc92UMz",
-  "version": 6
+  "version": 13
 }

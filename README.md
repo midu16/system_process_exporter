@@ -52,10 +52,14 @@ optional arguments:
 TBD
 
 
-
+### Testing capabilities
+```
+$ sudo yum install stress
+$ stress --cpu 4 --io 3 --vm 2 --vm-bytes 20G --timeout 20s
+```
 ### Progress
 * [x] Building the export functions
 * [x] Exporting data to ```pushgateway```
-* [ ] Generic Grafana dashboard
+* [x ] Generic Grafana dashboard
 * [ ] Defining Prometheus-alertmanager alarm thresholds
 * [ ] Building .rpm package
