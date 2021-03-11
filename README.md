@@ -64,3 +64,7 @@ $ stress --cpu 4 --io 3 --vm 2 --vm-bytes 20G --timeout 20s
 * [x] Generic Grafana dashboard
 * [ ] Defining Prometheus-alertmanager alarm thresholds
 * [ ] Building .rpm package
+
+
+### documentation
+https://psutil.readthedocs.io/en/latest/#psutil.Process.name
