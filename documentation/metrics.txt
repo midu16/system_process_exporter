@@ -1,0 +1,406 @@
+# TYPE cpu_usage untyped
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2044",process="systemd"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2048",process="(sd-pam)"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2072",process="gnome-keyring-daemon"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2079",process="gdm-x-session"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2082",process="Xorg"} 10.5
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2125",process="dbus-broker-launch"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2127",process="dbus-broker"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2130",process="gnome-session-binary"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2151",process="ssh-agent"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2169",process="gvfsd"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2174",process="gvfsd-fuse"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2189",process="at-spi-bus-launcher"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2194",process="dbus-broker-launch"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2195",process="dbus-broker"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2200",process="gnome-session-ctl"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2201",process="pulseaudio"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2203",process="gnome-session-binary"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2219",process="gnome-shell"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2250",process="ibus-daemon"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2254",process="ibus-dconf"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2255",process="ibus-extension-gtk3"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2257",process="ibus-x11"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2261",process="ibus-portal"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2271",process="at-spi2-registryd"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2275",process="xdg-permission-store"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2279",process="gnome-shell-calendar-server"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2286",process="evolution-source-registry"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2291",process="goa-daemon"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2296",process="dconf-service"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2304",process="gvfsd-metadata"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2307",process="gvfs-udisks2-volume-monitor"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2320",process="evolution-calendar-factory"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2325",process="gvfs-gphoto2-volume-monitor"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2336",process="goa-identity-service"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2337",process="gvfs-goa-volume-monitor"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2347",process="gvfs-afc-volume-monitor"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2352",process="gvfs-mtp-volume-monitor"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2378",process="evolution-addressbook-factory"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2405",process="dnf"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2427",process="gjs"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2443",process="gsd-a11y-settings"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2444",process="gsd-color"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2445",process="gsd-datetime"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2446",process="gsd-housekeeping"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2449",process="gsd-keyboard"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2452",process="gsd-media-keys"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2454",process="gsd-power"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2457",process="gsd-print-notifications"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2460",process="gsd-rfkill"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2461",process="gsd-screensaver-proxy"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2464",process="gsd-sharing"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2465",process="gsd-smartcard"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2469",process="gsd-sound"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2475",process="gsd-usb-protection"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2477",process="gsd-wacom"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2478",process="gsd-wwan"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2483",process="gsd-xsettings"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2586",process="ibus-engine-simple"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2592",process="gjs"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2628",process="gsd-printer"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2728",process="tracker-miner-fs"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2730",process="gnome-software"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2736",process="evolution-alarm-notify"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2739",process="abrt-applet"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2743",process="gsd-disk-utility-notify"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2753",process="skypeforlinux"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2816",process="skypeforlinux"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2827",process="skypeforlinux"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2871",process="skypeforlinux"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2874",process="skypeforlinux"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2889",process="skypeforlinux"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2926",process="skypeforlinux"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3122",process="caprine"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3136",process="xdg-document-portal"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3140",process="fusermount"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3187",process="caprine"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3188",process="caprine"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3213",process="caprine"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3222",process="caprine"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3230",process="thunderbird"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3253",process="caprine"} 10.4
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3345",process="Discord"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3811",process="Discord"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3812",process="Discord"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3856",process="Discord"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3863",process="Discord"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3935",process="Discord"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3968",process="Discord"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4257",process="gnome-calendar"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4295",process="gvfsd-trash"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4346",process="obexd"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4406",process="pycharm.sh"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4467",process="java"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4528",process="fsnotifier64"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4620",process="jcef_helper"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4621",process="jcef_helper"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4633",process="jcef_helper"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4643",process="jcef_helper"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4673",process="bash"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4940",process="firefox"} 10.4
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5015",process="Web Content"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5077",process="WebExtensions"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5139",process="chrome-gnome-sh"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5147",process="Privileged Cont"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5197",process="Web Content"} 20.8
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5297",process="RDD Process"} 41.6
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5361",process="Web Content"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5622",process="Web Content"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5716",process="Web Content"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5988",process="Web Content"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="6177",process="Web Content"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7105",process="bwrap"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7109",process="flatpak-session-helper"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7113",process="p11-kit-server"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7116",process="bwrap"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7117",process="xdg-dbus-proxy"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7119",process="bwrap"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7120",process="WhatsAppQT"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7125",process="xdg-desktop-portal"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7129",process="xdg-desktop-portal-gtk"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7139",process="pipewire"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7141",process="pipewire-media-session"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7155",process="QtWebEngineProcess"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7178",process="QtWebEngineProcess"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7180",process="QtWebEngineProcess"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7208",process="p11-kit-remote"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7259",process="caprine"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7492",process="Web Content"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="8100",process="python3"} 93.7
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="8373",process="gnome-terminal-server"} 0
+cpu_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="8380",process="bash"} 0
+# HELP go_gc_duration_seconds A summary of the GC invocation durations.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile="0"} 1.7549e-05
+go_gc_duration_seconds{quantile="0.25"} 2.7809e-05
+go_gc_duration_seconds{quantile="0.5"} 4.4352e-05
+go_gc_duration_seconds{quantile="0.75"} 6.9155e-05
+go_gc_duration_seconds{quantile="1"} 0.000648269
+go_gc_duration_seconds_sum 0.047507844
+go_gc_duration_seconds_count 723
+# HELP go_goroutines Number of goroutines that currently exist.
+# TYPE go_goroutines gauge
+go_goroutines 11
+# HELP go_info Information about the Go environment.
+# TYPE go_info gauge
+go_info{version="go1.11.8"} 1
+# HELP go_memstats_alloc_bytes Number of bytes allocated and still in use.
+# TYPE go_memstats_alloc_bytes gauge
+go_memstats_alloc_bytes 3.688032e+06
+# HELP go_memstats_alloc_bytes_total Total number of bytes allocated, even if freed.
+# TYPE go_memstats_alloc_bytes_total counter
+go_memstats_alloc_bytes_total 1.771432792e+09
+# HELP go_memstats_buck_hash_sys_bytes Number of bytes used by the profiling bucket hash table.
+# TYPE go_memstats_buck_hash_sys_bytes gauge
+go_memstats_buck_hash_sys_bytes 1.484134e+06
+# HELP go_memstats_frees_total Total number of frees.
+# TYPE go_memstats_frees_total counter
+go_memstats_frees_total 5.6618712e+07
+# HELP go_memstats_gc_cpu_fraction The fraction of this program's available CPU time used by the GC since the program started.
+# TYPE go_memstats_gc_cpu_fraction gauge
+go_memstats_gc_cpu_fraction 2.6875446989391535e-05
+# HELP go_memstats_gc_sys_bytes Number of bytes used for garbage collection system metadata.
+# TYPE go_memstats_gc_sys_bytes gauge
+go_memstats_gc_sys_bytes 2.379776e+06
+# HELP go_memstats_heap_alloc_bytes Number of heap bytes allocated and still in use.
+# TYPE go_memstats_heap_alloc_bytes gauge
+go_memstats_heap_alloc_bytes 3.688032e+06
+# HELP go_memstats_heap_idle_bytes Number of heap bytes waiting to be used.
+# TYPE go_memstats_heap_idle_bytes gauge
+go_memstats_heap_idle_bytes 6.1046784e+07
+# HELP go_memstats_heap_inuse_bytes Number of heap bytes that are in use.
+# TYPE go_memstats_heap_inuse_bytes gauge
+go_memstats_heap_inuse_bytes 4.882432e+06
+# HELP go_memstats_heap_objects Number of allocated objects.
+# TYPE go_memstats_heap_objects gauge
+go_memstats_heap_objects 55984
+# HELP go_memstats_heap_released_bytes Number of heap bytes released to OS.
+# TYPE go_memstats_heap_released_bytes gauge
+go_memstats_heap_released_bytes 0
+# HELP go_memstats_heap_sys_bytes Number of heap bytes obtained from system.
+# TYPE go_memstats_heap_sys_bytes gauge
+go_memstats_heap_sys_bytes 6.5929216e+07
+# HELP go_memstats_last_gc_time_seconds Number of seconds since 1970 of last garbage collection.
+# TYPE go_memstats_last_gc_time_seconds gauge
+go_memstats_last_gc_time_seconds 1.6155778775872846e+09
+# HELP go_memstats_lookups_total Total number of pointer lookups.
+# TYPE go_memstats_lookups_total counter
+go_memstats_lookups_total 0
+# HELP go_memstats_mallocs_total Total number of mallocs.
+# TYPE go_memstats_mallocs_total counter
+go_memstats_mallocs_total 5.6674696e+07
+# HELP go_memstats_mcache_inuse_bytes Number of bytes in use by mcache structures.
+# TYPE go_memstats_mcache_inuse_bytes gauge
+go_memstats_mcache_inuse_bytes 13824
+# HELP go_memstats_mcache_sys_bytes Number of bytes used for mcache structures obtained from system.
+# TYPE go_memstats_mcache_sys_bytes gauge
+go_memstats_mcache_sys_bytes 16384
+# HELP go_memstats_mspan_inuse_bytes Number of bytes in use by mspan structures.
+# TYPE go_memstats_mspan_inuse_bytes gauge
+go_memstats_mspan_inuse_bytes 66880
+# HELP go_memstats_mspan_sys_bytes Number of bytes used for mspan structures obtained from system.
+# TYPE go_memstats_mspan_sys_bytes gauge
+go_memstats_mspan_sys_bytes 98304
+# HELP go_memstats_next_gc_bytes Number of heap bytes when next garbage collection will take place.
+# TYPE go_memstats_next_gc_bytes gauge
+go_memstats_next_gc_bytes 4.384448e+06
+# HELP go_memstats_other_sys_bytes Number of bytes used for other system allocations.
+# TYPE go_memstats_other_sys_bytes gauge
+go_memstats_other_sys_bytes 2.245522e+06
+# HELP go_memstats_stack_inuse_bytes Number of bytes in use by the stack allocator.
+# TYPE go_memstats_stack_inuse_bytes gauge
+go_memstats_stack_inuse_bytes 1.179648e+06
+# HELP go_memstats_stack_sys_bytes Number of bytes obtained from system for stack allocator.
+# TYPE go_memstats_stack_sys_bytes gauge
+go_memstats_stack_sys_bytes 1.179648e+06
+# HELP go_memstats_sys_bytes Number of bytes obtained from system.
+# TYPE go_memstats_sys_bytes gauge
+go_memstats_sys_bytes 7.3332984e+07
+# HELP go_threads Number of OS threads created.
+# TYPE go_threads gauge
+go_threads 20
+# TYPE memory_usage untyped
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2044",process="systemd"} 0.04
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2048",process="(sd-pam)"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2072",process="gnome-keyring-daemon"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2079",process="gdm-x-session"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2082",process="Xorg"} 0.39
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2125",process="dbus-broker-launch"} 0.01
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2127",process="dbus-broker"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2130",process="gnome-session-binary"} 0.04
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2151",process="ssh-agent"} 0
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2169",process="gvfsd"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2174",process="gvfsd-fuse"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2189",process="at-spi-bus-launcher"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2194",process="dbus-broker-launch"} 0.01
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2195",process="dbus-broker"} 0.01
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2200",process="gnome-session-ctl"} 0.01
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2201",process="pulseaudio"} 0.05
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2203",process="gnome-session-binary"} 0.05
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2219",process="gnome-shell"} 1.27
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2250",process="ibus-daemon"} 0.03
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2254",process="ibus-dconf"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2255",process="ibus-extension-gtk3"} 0.08
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2257",process="ibus-x11"} 0.07
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2261",process="ibus-portal"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2271",process="at-spi2-registryd"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2275",process="xdg-permission-store"} 0.01
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2279",process="gnome-shell-calendar-server"} 0.07
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2286",process="evolution-source-registry"} 0.11
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2291",process="goa-daemon"} 0.27
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2296",process="dconf-service"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2304",process="gvfsd-metadata"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2307",process="gvfs-udisks2-volume-monitor"} 0.03
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2320",process="evolution-calendar-factory"} 0.16
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2325",process="gvfs-gphoto2-volume-monitor"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2336",process="goa-identity-service"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2337",process="gvfs-goa-volume-monitor"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2347",process="gvfs-afc-volume-monitor"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2352",process="gvfs-mtp-volume-monitor"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2378",process="evolution-addressbook-factory"} 0.15
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2405",process="dnf"} 0.45
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2427",process="gjs"} 0.08
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2443",process="gsd-a11y-settings"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2444",process="gsd-color"} 0.08
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2445",process="gsd-datetime"} 0.05
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2446",process="gsd-housekeeping"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2449",process="gsd-keyboard"} 0.07
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2452",process="gsd-media-keys"} 0.08
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2454",process="gsd-power"} 0.07
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2457",process="gsd-print-notifications"} 0.04
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2460",process="gsd-rfkill"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2461",process="gsd-screensaver-proxy"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2464",process="gsd-sharing"} 0.03
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2465",process="gsd-smartcard"} 0.04
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2469",process="gsd-sound"} 0.03
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2475",process="gsd-usb-protection"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2477",process="gsd-wacom"} 0.07
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2478",process="gsd-wwan"} 0.03
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2483",process="gsd-xsettings"} 0.07
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2586",process="ibus-engine-simple"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2592",process="gjs"} 0.14
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2628",process="gsd-printer"} 0.05
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2728",process="tracker-miner-fs"} 0.09
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2730",process="gnome-software"} 0.43
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2736",process="evolution-alarm-notify"} 0.17
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2739",process="abrt-applet"} 0.07
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2743",process="gsd-disk-utility-notify"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2753",process="skypeforlinux"} 0.44
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2816",process="skypeforlinux"} 0.13
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2827",process="skypeforlinux"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2871",process="skypeforlinux"} 0.49
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2874",process="skypeforlinux"} 0.22
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2889",process="skypeforlinux"} 0.79
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="2926",process="skypeforlinux"} 0.06
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3122",process="caprine"} 0.42
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3136",process="xdg-document-portal"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3140",process="fusermount"} 0.01
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3187",process="caprine"} 0.13
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3188",process="caprine"} 0.13
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3213",process="caprine"} 0.36
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3222",process="caprine"} 0.2
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3230",process="thunderbird"} 1.69
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3253",process="caprine"} 0.67
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3345",process="Discord"} 0.44
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3811",process="Discord"} 0.13
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3812",process="Discord"} 0.13
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3856",process="Discord"} 0.33
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3863",process="Discord"} 0.21
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3935",process="Discord"} 0.94
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="3968",process="Discord"} 0.15
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4257",process="gnome-calendar"} 0.17
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4295",process="gvfsd-trash"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4346",process="obexd"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4406",process="pycharm.sh"} 0.01
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4467",process="java"} 3.24
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4528",process="fsnotifier64"} 0.01
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4620",process="jcef_helper"} 0.15
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4621",process="jcef_helper"} 0.15
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4633",process="jcef_helper"} 0.17
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4643",process="jcef_helper"} 0.17
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4673",process="bash"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="4940",process="firefox"} 1.5
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5015",process="Web Content"} 0.97
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5077",process="WebExtensions"} 0.34
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5139",process="chrome-gnome-sh"} 0.09
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5147",process="Privileged Cont"} 0.44
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5197",process="Web Content"} 1.4
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5297",process="RDD Process"} 0.35
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5361",process="Web Content"} 0.68
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5622",process="Web Content"} 0.64
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5716",process="Web Content"} 0.64
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="5988",process="Web Content"} 0.73
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="6177",process="Web Content"} 0.7
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7105",process="bwrap"} 0
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7109",process="flatpak-session-helper"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7113",process="p11-kit-server"} 0
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7116",process="bwrap"} 0
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7117",process="xdg-dbus-proxy"} 0.02
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7119",process="bwrap"} 0
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7120",process="WhatsAppQT"} 0.64
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7125",process="xdg-desktop-portal"} 0.04
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7129",process="xdg-desktop-portal-gtk"} 0.08
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7139",process="pipewire"} 0.03
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7141",process="pipewire-media-session"} 0.03
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7155",process="QtWebEngineProcess"} 0.14
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7178",process="QtWebEngineProcess"} 0.2
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7180",process="QtWebEngineProcess"} 0.48
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7208",process="p11-kit-remote"} 0.03
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7259",process="caprine"} 0.15
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="7492",process="Web Content"} 0.87
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="8100",process="python3"} 0.07
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="8373",process="gnome-terminal-server"} 0.14
+memory_usage{instance="desktop-localdomain",job="systemprocess_exporter",pid="8380",process="bash"} 0.02
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 10.21
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1024
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 9
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 1.5908864e+07
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.61557411131e+09
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 1.17424128e+08
+# HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in bytes.
+# TYPE process_virtual_memory_max_bytes gauge
+process_virtual_memory_max_bytes -1
+# HELP promhttp_metric_handler_requests_in_flight Current number of scrapes being served.
+# TYPE promhttp_metric_handler_requests_in_flight gauge
+promhttp_metric_handler_requests_in_flight 1
+# HELP promhttp_metric_handler_requests_total Total number of scrapes by HTTP status code.
+# TYPE promhttp_metric_handler_requests_total counter
+promhttp_metric_handler_requests_total{code="200"} 377
+promhttp_metric_handler_requests_total{code="500"} 0
+promhttp_metric_handler_requests_total{code="503"} 0
+# HELP push_time_seconds Last Unix time when this group was changed in the Pushgateway.
+# TYPE push_time_seconds gauge
+push_time_seconds{instance="desktop-localdomain",job="systemprocess_exporter"} 1.6155778781325758e+09
+# HELP pushgateway_build_info A metric with a constant '1' value labeled by version, revision, branch, and goversion from which pushgateway was built.
+# TYPE pushgateway_build_info gauge
+pushgateway_build_info{branch="HEAD",goversion="go1.11.8",revision="d90bf3239c5ca08d72ccc9e2e2ff3a62b99a122e",version="0.8.0"} 1
+# HELP pushgateway_http_push_duration_seconds HTTP request duration for pushes to the Pushgateway.
+# TYPE pushgateway_http_push_duration_seconds summary
+pushgateway_http_push_duration_seconds{method="post",quantile="0.1"} 0.000237279
+pushgateway_http_push_duration_seconds{method="post",quantile="0.5"} 0.000257925
+pushgateway_http_push_duration_seconds{method="post",quantile="0.9"} 0.000363084
+pushgateway_http_push_duration_seconds_sum{method="post"} 3.599155725000002
+pushgateway_http_push_duration_seconds_count{method="post"} 12945
+# HELP pushgateway_http_push_size_bytes HTTP request size for pushes to the Pushgateway.
+# TYPE pushgateway_http_push_size_bytes summary
+pushgateway_http_push_size_bytes{method="post",quantile="0.1"} 6949
+pushgateway_http_push_size_bytes{method="post",quantile="0.5"} 7451
+pushgateway_http_push_size_bytes{method="post",quantile="0.9"} 7453
+pushgateway_http_push_size_bytes_sum{method="post"} 9.285536e+07
+pushgateway_http_push_size_bytes_count{method="post"} 12945
+# HELP pushgateway_http_requests_total Total HTTP requests processed by the Pushgateway, excluding scrapes.
+# TYPE pushgateway_http_requests_total counter
+pushgateway_http_requests_total{code="202",handler="push",method="post"} 12945
