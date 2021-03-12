@@ -8,18 +8,18 @@ import time
 import psutil,getpass,os
 import argparse
 
-
-def memory_usage_data_payload_command(username):
+def io_usage_data_payload(username):
     """
-        This fucntion is similar tomemory_usage_data_payload just enhancing the infromations of the pid.
+        This fucntion is building the payload of the post method to the pushgateway-server.
 
     :param username:            The username of the user under which the systemprocess_exporter runs.
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
     """
-    # the newer structure format will be 
     process_dict = {"memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
-        proc.pid) + '"' + "process_command=" + '"' + str(proc.cmdline()) + '"' + "}": proc.memory_percent(memtype="rss") for proc in psutil.process_iter() if
+        proc.pid) + '"' + "}": proc.memory_percent(memtype="rss") for proc in psutil.process_iter() if
                     proc.username() == username}
+    process_command = {proc.pid: proc.cmdline() for proc in psutil.process_iter() if proc.username() == username}
+    print(process_command.values())
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
@@ -37,7 +37,6 @@ def memory_usage_data_payload_command(username):
         data.append(str(key[index]) + ' ' + str(value[index]) + '\n')
     return data
 
-
 def memory_usage_data_payload(username):
     """
         This fucntion is building the payload of the post method to the pushgateway-server.
@@ -48,6 +47,9 @@ def memory_usage_data_payload(username):
     process_dict = {"memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
         proc.pid) + '"' + "}": proc.memory_percent(memtype="rss") for proc in psutil.process_iter() if
                     proc.username() == username}
+    cmdline = [proc.cmdline() for proc in psutil.process_iter() if proc.username() == username]
+    print(len(cmdline))
+    #" , " + "process_cmdline=" + '"' + str(proc.cmdline()) +
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
@@ -80,6 +82,7 @@ def cpu_usage_data_payload(username):
     key = []
     for index in process_dict.keys():
         key.append(str(index))
+        #print(key)
 
     value = []
     for index in process_dict.values():
@@ -99,9 +102,9 @@ def pushgateway_post(endpoint, data):
     :return:                    The return is a REST-API POST call to the prometheus-pushgateway-server endpoint.
     """
     #curl -X POST -H  "Content-Type: text/plain" --data "$var" http://localhost:9091/metrics/job/top/instance/machine
-    url = 'http://'+str(endpoint)+'/metrics/job/top/instance/machine'
+    myhost = os.uname()[1]
+    url = 'http://'+str(endpoint)+'/metrics/job/systemprocess_exporter/instance/'+str(myhost)
     headers = {'X-Requested-With': 'Python requests', 'Content-type': 'text/xml'}
-    time.sleep(0.5)
     return requests.post(url, data='%s' % data, headers=headers)
 
 #list to plain text function conversion for better
@@ -114,9 +117,9 @@ if __name__ == "__main__":
     parser.add_argument("-pp", "--prometheus-pushgateway", action="store_true",
                         help="Push the data to the Prometheus pushgateway each second. Using default endpoint http://localhost:9091/metrics/job/top/instance/machine")
     parser.add_argument("-e", "--pushgateway-server-ipaddr", type=str, default="localhost",
-                        help="Changing the localhost pudshgateway-server IPaddr. ")
+                        help="Changing the localhost pudshgateway-server IPaddr. Default=localhost")
     parser.add_argument("-p", "--pushgateway-server-port", type=str, default="9091",
-                        help="Changing the pushgateway-server port.")
+                        help="Changing the pushgateway-server port. Default=9091.")
     # managing the arguments
     args = parser.parse_args()
     prometheus_pushgateway = args.prometheus_pushgateway
@@ -125,10 +128,13 @@ if __name__ == "__main__":
     # changing the port communication of the default pushgateway-server.
     pushgateway_server_port = str(args.pushgateway_server_port)
     # print the processes for the first time
-    while prometheus_pushgateway:
-        endpoint_pushgateway = str(pushgateway_server_ip_addr) + ":" + str(pushgateway_server_port)
-    # calling the actions
-        user_name = getpass.getuser()
-        pushgateway_post(endpoint_pushgateway,fun(memory_usage_data_payload(user_name)))
-        pushgateway_post(endpoint_pushgateway,fun(cpu_usage_data_payload(user_name)))
+    if prometheus_pushgateway:
+        while prometheus_pushgateway:
+            endpoint_pushgateway = str(pushgateway_server_ip_addr) + ":" + str(pushgateway_server_port)
+        # calling the actions
+            user_name = getpass.getuser()
+            pushgateway_post(endpoint_pushgateway,fun(memory_usage_data_payload(user_name)))
+            pushgateway_post(endpoint_pushgateway,fun(cpu_usage_data_payload(user_name)))
+    else:
+        print("Please, check the $systemprocess_exporter -h!")
 
