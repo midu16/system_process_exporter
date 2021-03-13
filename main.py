@@ -18,6 +18,86 @@ def test_systemprocess_exporter():
     with pytest.raises(SystemExit):
         f()
 
+def process_children_data_payload(username):
+    """
+        This function is building the payload of the post method to the pushgateway-server.
+
+    :param username:            The username of the user under which the systemprocess_exporter runs.
+    :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
+    """
+    process_dict = {"process_status" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
+        proc.pid) + '"' + "}": proc.is_running() for proc in psutil.process_iter() if
+                    proc.username() == username}
+    """
+        Make sure that the key is of type str. Is generated as dictionary.
+            Make sure that the value is of type float. Is generated as dictionary.
+    """
+    key = []
+    for index in process_dict.keys():
+        key.append(str(index))
+
+    value = []
+    for index in process_dict.values():
+        value.append(str(round(index, 2)))
+
+    data = []
+    for index in range(0, len(process_dict.keys())):
+        data.append(str(key[index]) + ' ' + str(value[index]) + '\n')
+    return data
+
+def process_status_data_payload(username):
+    """
+        This function is building the payload of the post method to the pushgateway-server.
+
+    :param username:            The username of the user under which the systemprocess_exporter runs.
+    :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
+    """
+    process_dict = {"process_status" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
+        proc.pid) + '"' + "}": proc.is_running() for proc in psutil.process_iter() if
+                    proc.username() == username}
+    """
+        Make sure that the key is of type str. Is generated as dictionary.
+            Make sure that the value is of type float. Is generated as dictionary.
+    """
+    key = []
+    for index in process_dict.keys():
+        key.append(str(index))
+
+    value = []
+    for index in process_dict.values():
+        value.append(str(round(index, 2)))
+
+    data = []
+    for index in range(0, len(process_dict.keys())):
+        data.append(str(key[index]) + ' ' + str(value[index]) + '\n')
+    return data
+
+def open_connections_data_payload(username):
+    """
+        This function is building the payload of the post method to the pushgateway-server.
+
+    :param username:            The username of the user under which the systemprocess_exporter runs.
+    :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
+    """
+    process_dict = {"memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
+        proc.pid) + '"' + "}": proc.connections() for proc in psutil.process_iter() if
+                    proc.username() == username}
+    """
+        Make sure that the key is of type str. Is generated as dictionary.
+            Make sure that the value is of type float. Is generated as dictionary.
+    """
+    key = []
+    for index in process_dict.keys():
+        key.append(str(index))
+
+    value = []
+    for index in process_dict.values():
+        value.append(str(round(index, 2)))
+
+    data = []
+    for index in range(0, len(process_dict.keys())):
+        data.append(str(key[index]) + ' ' + str(value[index]) + '\n')
+    return data
 
 def io_usage_data_payload(username):
     """
@@ -54,10 +134,9 @@ def memory_usage_data_payload(username):
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
     """
     process_dict = {"memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
-        proc.pid) + '"' + "}": proc.memory_percent(memtype="rss") for proc in psutil.process_iter() if
+        proc.pid) + '"' + "}": proc.memory_percent(memtype="vms") for proc in psutil.process_iter() if
                     proc.username() == username}
-    cmdline = [proc.cmdline() for proc in psutil.process_iter() if proc.username() == username]
-    #print(cmdline)
+    #
     #" , " + "process_cmdline=" + '"' + str(proc.cmdline()) +
     """
         Make sure that the key is of type str. Is generated as dictionary.
