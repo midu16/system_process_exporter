@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 15,
-  "iteration": 1615412781932,
+  "iteration": 1615626974180,
   "links": [],
   "panels": [
     {
@@ -43,13 +43,13 @@
       "hiddenSeries": false,
       "id": 2,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -68,7 +68,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(10,memory_usage{exported_instance=\"machine\",exported_job=\"top\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
+          "expr": "topk(10,memory_usage{exported_instance=\"$instance\",exported_job=\"systemprocess_exporter\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
@@ -143,13 +143,13 @@
       "hiddenSeries": false,
       "id": 3,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -168,7 +168,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(10,cpu_usage{exported_instance=\"machine\",exported_job=\"top\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
+          "expr": "topk(10,cpu_usage{exported_instance=\"$instance\",exported_job=\"systemprocess_exporter\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
           "instant": false,
           "interval": "",
           "legendFormat": "$process",
@@ -196,9 +196,9 @@
       },
       "yaxes": [
         {
-          "decimals": null,
+          "decimals": 3,
           "format": "percent",
-          "label": null,
+          "label": "",
           "logBase": 1,
           "max": "100",
           "min": "0",
@@ -229,8 +229,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "python3",
-          "value": "python3"
+          "text": "firefox",
+          "value": "firefox"
         },
         "datasource": "Prometheus",
         "definition": "label_values(memory_usage{job=\"prometheus\"}, process)",
@@ -256,8 +256,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "11595",
-          "value": "11595"
+          "text": "1",
+          "value": "1"
         },
         "datasource": "Prometheus",
         "definition": "label_values(memory_usage{job=\"prometheus\"}, pid)",
@@ -278,16 +278,43 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "desktop-localdomain",
+          "value": "desktop-localdomain"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(memory_usage{job=\"prometheus\"}, exported_instance)",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "instance",
+        "multi": false,
+        "name": "instance",
+        "options": [],
+        "query": "label_values(memory_usage{job=\"prometheus\"}, exported_instance)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "SystemProcess Usage",
   "uid": "Yvtc92UMz",
-  "version": 13
+  "version": 18
 }
