@@ -7,19 +7,28 @@ import requests
 import time
 import psutil,getpass,os
 import argparse
+import pytest
+
+
+#
+def f():
+    raise SystemExit(1)
+
+def test_systemprocess_exporter():
+    with pytest.raises(SystemExit):
+        f()
+
 
 def io_usage_data_payload(username):
     """
-        This fucntion is building the payload of the post method to the pushgateway-server.
+        This function is building the payload of the post method to the pushgateway-server.
 
     :param username:            The username of the user under which the systemprocess_exporter runs.
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
     """
     process_dict = {"memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
-        proc.pid) + '"' + "}": proc.memory_percent(memtype="rss") for proc in psutil.process_iter() if
+        proc.pid) + '"' + "}": proc.io_counters() for proc in psutil.process_iter() if
                     proc.username() == username}
-    process_command = {proc.pid: proc.cmdline() for proc in psutil.process_iter() if proc.username() == username}
-    print(process_command.values())
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
@@ -39,7 +48,7 @@ def io_usage_data_payload(username):
 
 def memory_usage_data_payload(username):
     """
-        This fucntion is building the payload of the post method to the pushgateway-server.
+        This function is building the payload of the post method to the pushgateway-server.
 
     :param username:            The username of the user under which the systemprocess_exporter runs.
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
@@ -48,7 +57,7 @@ def memory_usage_data_payload(username):
         proc.pid) + '"' + "}": proc.memory_percent(memtype="rss") for proc in psutil.process_iter() if
                     proc.username() == username}
     cmdline = [proc.cmdline() for proc in psutil.process_iter() if proc.username() == username]
-    print(len(cmdline))
+    #print(cmdline)
     #" , " + "process_cmdline=" + '"' + str(proc.cmdline()) +
     """
         Make sure that the key is of type str. Is generated as dictionary.
@@ -96,7 +105,7 @@ def cpu_usage_data_payload(username):
 # building the pushgateway_post function
 def pushgateway_post(endpoint, data):
     """"
-        The function is transporing the payload to the designated endpoint.
+        The function is transporting the payload to the designated endpoint.
     :param endpoint:            Cli custom value of the enpoint. type string. <ip_addr>:<port>
     :param data:                The data-payload to be transporter
     :return:                    The return is a REST-API POST call to the prometheus-pushgateway-server endpoint.
