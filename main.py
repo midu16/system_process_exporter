@@ -143,6 +143,7 @@ if __name__ == "__main__":
         # calling the actions
             user_name = getpass.getuser()
             pushgateway_post(endpoint_pushgateway,fun(memory_usage_data_payload(user_name)))
+            time.sleep(1)
             pushgateway_post(endpoint_pushgateway,fun(cpu_usage_data_payload(user_name)))
     else:
         print("Please, check the $systemprocess_exporter -h!")
