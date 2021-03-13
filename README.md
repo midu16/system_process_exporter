@@ -64,11 +64,16 @@ $ stress --cpu 4 --io 3 --vm 2 --vm-bytes 20G --timeout 20s
 ### Progress
 * [x] Building the export functions
 * [x] Exporting data to ```pushgateway```
+* [x] Supporting host resolution into the push-url
+* [x] Supporting data export from the ```systemprocess_exporter``` to ```pushgateway``` with 1second resolution
 * [ ] Adding complete_process_command to the data payload of the push 
 * [x] Generic Grafana dashboard
+* [ ] Supporting the ```{process_name:pid:io_counters}``` statistics
 * [ ] Defining Prometheus-alertmanager alarm thresholds
 * [ ] Building .rpm package
 
 
-### documentation
-https://psutil.readthedocs.io/en/latest/#psutil.Process.name
+### Documentation
+
+[1] https://psutil.readthedocs.io/en/latest/#psutil.Process.name
+[2] https://docs.pytest.org/en/stable/
