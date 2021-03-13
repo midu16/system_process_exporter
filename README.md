@@ -2,6 +2,9 @@
 Prometheus systemprocess_exporter 
 
 
+### TravisCI
+[![Build Status](https://travis-ci.com/midu16/systemprocess_exporter.svg?branch=master)](https://travis-ci.com/midu16/systemprocess_exporter)
+
 ### Solution Architecture
 
 ![LLD Solution Architecture](https://github.com/midu16/system_process_pushgateway/blob/master/documentation/Untitled%20Diagram.png)
