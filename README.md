@@ -66,6 +66,7 @@ $ stress --cpu 4 --io 3 --vm 2 --vm-bytes 20G --timeout 20s
 * [x] Exporting data to ```pushgateway```
 * [x] Supporting host resolution into the push-url
 * [x] Supporting data export from the ```systemprocess_exporter``` to ```pushgateway``` with 1second resolution
+* [x] Improving the CPU usage performance of the ```systemprocess_exporter```. Lower the consumption of the CPU < 10%
 * [ ] Adding complete_process_command to the data payload of the push 
 * [x] Generic Grafana dashboard
 * [ ] Supporting the ```{process_name:pid:io_counters}``` statistics
