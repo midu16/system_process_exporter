@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 15,
-  "iteration": 1615748298717,
+  "iteration": 1615749214304,
   "links": [],
   "panels": [
     {
@@ -444,8 +444,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "java",
-          "value": "java"
+          "text": "Discord",
+          "value": "Discord"
         },
         "datasource": "Prometheus",
         "definition": "label_values(memory_usage{job=\"prometheus\"}, process)",
@@ -471,11 +471,11 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "/snap/pycharm-community/226/jbr/bin/java--classpath-/snap/pycharm-community/226/lib/bootstrap.jar:/snap/pycharm-community/226/lib/extensions.jar:/snap/pycharm-community/226/lib/util.jar:/snap/pycharm-community/226/lib/jdom.jar:/snap/pycharm-community/226/lib/log4j.jar:/snap/pycharm-community/226/lib/jna.jar",
-          "value": "/snap/pycharm-community/226/jbr/bin/java--classpath-/snap/pycharm-community/226/lib/bootstrap.jar:/snap/pycharm-community/226/lib/extensions.jar:/snap/pycharm-community/226/lib/util.jar:/snap/pycharm-community/226/lib/jdom.jar:/snap/pycharm-community/226/lib/log4j.jar:/snap/pycharm-community/226/lib/jna.jar"
+          "text": "/snap/discord/121/usr/share/discord/Discord---type=zygote---no-sandbox",
+          "value": "/snap/discord/121/usr/share/discord/Discord---type=zygote---no-sandbox"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(memory_usage{job=\"prometheus\"}, cmdline_process)",
+        "definition": "label_values(memory_usage{process=\"$process\", job=\"prometheus\"}, cmdline_process)",
         "error": null,
         "hide": 0,
         "includeAll": false,
@@ -483,7 +483,7 @@
         "multi": false,
         "name": "process_command",
         "options": [],
-        "query": "label_values(memory_usage{job=\"prometheus\"}, cmdline_process)",
+        "query": "label_values(memory_usage{process=\"$process\", job=\"prometheus\"}, cmdline_process)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -524,12 +524,12 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "SystemProcess Usage",
   "uid": "Yvtc92UMz",
-  "version": 27
+  "version": 30
 }
