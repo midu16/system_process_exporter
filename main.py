@@ -18,6 +18,7 @@ def f():
 def test_systemprocess_exporter():
     with pytest.raises(SystemExit):
         f()
+        
 def process_children_data_payload(username):
     """
         This function is building the payload of the post method to the pushgateway-server.
