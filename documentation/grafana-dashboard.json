@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 15,
-  "iteration": 1615626974180,
+  "iteration": 1615748298717,
   "links": [],
   "panels": [
     {
@@ -68,11 +68,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(10,memory_usage{exported_instance=\"$instance\",exported_job=\"systemprocess_exporter\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
+          "expr": "topk(10,memory_usage{cmdline_process=\"$process_command\",exported_instance=\"$instance\",exported_job=\"systemprocess_exporter\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "$process ",
+          "legendFormat": "$process : $process_command",
           "refId": "A"
         }
       ],
@@ -97,7 +97,7 @@
       },
       "yaxes": [
         {
-          "decimals": null,
+          "decimals": 3,
           "format": "percent",
           "label": "",
           "logBase": 1,
@@ -168,10 +168,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(10,cpu_usage{exported_instance=\"$instance\",exported_job=\"systemprocess_exporter\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
+          "expr": "topk(10,cpu_usage{cmdline_process=\"$process_command\",exported_instance=\"$instance\",exported_job=\"systemprocess_exporter\",instance=\"localhost:57005\",job=\"prometheus\",process=\"$process\"})  ",
           "instant": false,
           "interval": "",
-          "legendFormat": "$process",
+          "legendFormat": "$process : $process_command",
           "refId": "A"
         }
       ],
@@ -217,6 +217,221 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 11,
+        "x": 0,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "topk(1, process_status) by ($process)",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "$process : $process_command",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ProcessService Status",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 3,
+          "format": "none",
+          "label": "",
+          "logBase": 1,
+          "max": "2",
+          "min": "-1",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 13,
+        "x": 11,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "pushgateway_http_push_size_bytes",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "pushgateway body size ",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "kbytes",
+          "label": null,
+          "logBase": 1,
+          "max": "100000",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "5s",
@@ -229,8 +444,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "firefox",
-          "value": "firefox"
+          "text": "java",
+          "value": "java"
         },
         "datasource": "Prometheus",
         "definition": "label_values(memory_usage{job=\"prometheus\"}, process)",
@@ -255,20 +470,20 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "1",
-          "value": "1"
+          "selected": true,
+          "text": "/snap/pycharm-community/226/jbr/bin/java--classpath-/snap/pycharm-community/226/lib/bootstrap.jar:/snap/pycharm-community/226/lib/extensions.jar:/snap/pycharm-community/226/lib/util.jar:/snap/pycharm-community/226/lib/jdom.jar:/snap/pycharm-community/226/lib/log4j.jar:/snap/pycharm-community/226/lib/jna.jar",
+          "value": "/snap/pycharm-community/226/jbr/bin/java--classpath-/snap/pycharm-community/226/lib/bootstrap.jar:/snap/pycharm-community/226/lib/extensions.jar:/snap/pycharm-community/226/lib/util.jar:/snap/pycharm-community/226/lib/jdom.jar:/snap/pycharm-community/226/lib/log4j.jar:/snap/pycharm-community/226/lib/jna.jar"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(memory_usage{job=\"prometheus\"}, pid)",
+        "definition": "label_values(memory_usage{job=\"prometheus\"}, cmdline_process)",
         "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": "pid",
+        "label": "process_command",
         "multi": false,
-        "name": "pid",
+        "name": "process_command",
         "options": [],
-        "query": "label_values(memory_usage{job=\"prometheus\"}, pid)",
+        "query": "label_values(memory_usage{job=\"prometheus\"}, cmdline_process)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -282,7 +497,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "desktop-localdomain",
           "value": "desktop-localdomain"
         },
@@ -316,5 +531,5 @@
   "timezone": "browser",
   "title": "SystemProcess Usage",
   "uid": "Yvtc92UMz",
-  "version": 18
+  "version": 27
 }
