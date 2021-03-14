@@ -55,6 +55,7 @@ optional arguments:
 The following picture is presenting a set of data samples results for *java* process:
 ![Grafana results](https://github.com/midu16/systemprocess_exporter/blob/master/documentation/Screenshot_2021-03-10%20SystemProcess%20Usage%20-%20Grafana.png)
 
+![Grafana results1](https://github.com/midu16/systemprocess_exporter/blob/4c4da95f404c821853733caf05b92830fb26dbd5/documentation/Screenshot_2021-03-14%20SystemProcess%20Usage%20-%20Grafana.png)
 
 ### Testing capabilities
 ```
