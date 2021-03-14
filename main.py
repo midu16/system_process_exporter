@@ -8,6 +8,7 @@ import time
 import psutil,getpass,os
 import argparse
 import pytest
+import multiprocessing
 
 
 #
@@ -17,7 +18,6 @@ def f():
 def test_systemprocess_exporter():
     with pytest.raises(SystemExit):
         f()
-
 def process_children_data_payload(username):
     """
         This function is building the payload of the post method to the pushgateway-server.
@@ -52,9 +52,11 @@ def process_status_data_payload(username):
     :param username:            The username of the user under which the systemprocess_exporter runs.
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
     """
-    process_dict = {"process_status" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
-        proc.pid) + '"' + "}": proc.is_running() for proc in psutil.process_iter() if
-                    proc.username() == username}
+    process_dict = {
+        "process_status" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "cmdline_process=" + '"' +
+        str('-'.join(proc.cmdline()[0:3])) + '"' + "}": proc.is_running()  for proc in
+        psutil.process_iter() if
+        proc.username() == user_name}
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
@@ -79,7 +81,7 @@ def open_connections_data_payload(username):
     :param username:            The username of the user under which the systemprocess_exporter runs.
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
     """
-    process_dict = {"memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
+    process_dict = {"connection_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
         proc.pid) + '"' + "}": proc.connections() for proc in psutil.process_iter() if
                     proc.username() == username}
     """
@@ -106,7 +108,7 @@ def io_usage_data_payload(username):
     :param username:            The username of the user under which the systemprocess_exporter runs.
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
     """
-    process_dict = {"memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
+    process_dict = {"io_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
         proc.pid) + '"' + "}": proc.io_counters() for proc in psutil.process_iter() if
                     proc.username() == username}
     """
@@ -133,11 +135,10 @@ def memory_usage_data_payload(username):
     :param username:            The username of the user under which the systemprocess_exporter runs.
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
     """
-    process_dict = {"memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
-        proc.pid) + '"' + "}": proc.memory_percent(memtype="vms") for proc in psutil.process_iter() if
-                    proc.username() == username}
-    #
-    #" , " + "process_cmdline=" + '"' + str(proc.cmdline()) +
+    process_dict = {
+        "memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "cmdline_process=" + '"' +
+        str('-'.join(proc.cmdline()[0:3])) + '"' + "}": proc.memory_percent(memtype="vms") for proc in psutil.process_iter() if
+        proc.username() == user_name}
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
@@ -160,9 +161,14 @@ def cpu_usage_data_payload(username):
     :param username:            The username of the user under which the systemprocess_exporter runs.
     :return:                    The cpu_measure data-payload
     """
-    process_dict = {"cpu_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
-        proc.pid) + '"' + "}": proc.cpu_percent(interval=None) for proc in psutil.process_iter() if
-                    proc.username() == username}
+    #process_dict = {"cpu_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
+    #    proc.pid) + '"' + "}": proc.cpu_percent(interval=None) for proc in psutil.process_iter() if
+    #                proc.username() == username}
+    process_dict = {
+        "cpu_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "cmdline_process=" + '"' +
+        str('-'.join(proc.cmdline()[0:3])) + '"' + "}": proc.cpu_percent(interval=None) for proc in
+        psutil.process_iter() if
+        proc.username() == user_name}
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
@@ -199,6 +205,12 @@ def pushgateway_post(endpoint, data):
 def fun(data):
     return "".join([str(item) for var in data for item in var])
 
+def comma_split(data):
+    return ''.join(i for i in str(data).split(','))
+
+def extract(data):
+    return [item[0:3] for item in data]
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Process Viewer, Monitor & Prometheus-PushGateway exporter - Mihai Idu 2021")
@@ -219,11 +231,13 @@ if __name__ == "__main__":
     if prometheus_pushgateway:
         while prometheus_pushgateway:
             endpoint_pushgateway = str(pushgateway_server_ip_addr) + ":" + str(pushgateway_server_port)
-        # calling the actions
+            # calling the actions
             user_name = getpass.getuser()
             pushgateway_post(endpoint_pushgateway,fun(memory_usage_data_payload(user_name)))
             time.sleep(1)
             pushgateway_post(endpoint_pushgateway,fun(cpu_usage_data_payload(user_name)))
+            time.sleep(1)
+            pushgateway_post(endpoint_pushgateway,fun(process_status_data_payload(user_name)))
+            ###
     else:
         print("Please, check the $systemprocess_exporter -h!")
-
