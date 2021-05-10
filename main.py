@@ -7,7 +7,7 @@ import requests
 import time
 import psutil,getpass,os
 import argparse
-import pytest
+#import pytest
 import multiprocessing
 
 
@@ -39,7 +39,7 @@ def process_children_data_payload(username):
 
     value = []
     for index in process_dict.values():
-        value.append(str(round(index, 2)))
+        value.append(str(round(index, 4)))
 
     data = []
     for index in range(0, len(process_dict.keys())):
@@ -55,9 +55,10 @@ def process_status_data_payload(username):
     """
     process_dict = {
         "process_status" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "cmdline_process=" + '"' +
-        str('-'.join(proc.cmdline()[0:3])) + '"' + "}": proc.is_running()  for proc in
-        psutil.process_iter() if
-        proc.username() == user_name}
+        str(''.join(i for i in str(''.join(
+            proc.cmdline()[0:(len(''.join(proc.cmdline())) if len(str(''.join(proc.cmdline()))) < 8 else 3)])).split(
+            ','))) + '"' + "}": proc.is_running()
+        for proc in psutil.process_iter() if proc.username() == username}
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
@@ -68,7 +69,7 @@ def process_status_data_payload(username):
 
     value = []
     for index in process_dict.values():
-        value.append(str(round(index, 2)))
+        value.append(str(round(index, 4)))
 
     data = []
     for index in range(0, len(process_dict.keys())):
@@ -95,7 +96,7 @@ def open_connections_data_payload(username):
 
     value = []
     for index in process_dict.values():
-        value.append(str(round(index, 2)))
+        value.append(str(round(index, 4)))
 
     data = []
     for index in range(0, len(process_dict.keys())):
@@ -110,7 +111,7 @@ def io_usage_data_payload(username):
     :return:                    The retun is a REST-API POST call to the Prometheus-pushgateway endpoint.
     """
     process_dict = {"io_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "pid=" + '"' + str(
-        proc.pid) + '"' + "}": proc.io_counters() for proc in psutil.process_iter() if
+        proc.pid) + '' + "}": proc.io_counters() for proc in psutil.process_iter() if
                     proc.username() == username}
     """
         Make sure that the key is of type str. Is generated as dictionary.
@@ -122,7 +123,7 @@ def io_usage_data_payload(username):
 
     value = []
     for index in process_dict.values():
-        value.append(str(round(index, 2)))
+        value.append(str(round(index, 4)))
 
     data = []
     for index in range(0, len(process_dict.keys())):
@@ -138,8 +139,12 @@ def memory_usage_data_payload(username):
     """
     process_dict = {
         "memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "cmdline_process=" + '"' +
-        str('-'.join(proc.cmdline()[0:3])) + '"' + "}": proc.memory_percent(memtype="vms") for proc in psutil.process_iter() if
-        proc.username() == user_name}
+        str(''.join(i for i in str(''.join(
+            proc.cmdline()[0:(len(''.join(proc.cmdline())) if len(str(''.join(proc.cmdline()))) < 8 else 3)])).split(
+            ','))) + '"' + "}": proc.memory_percent(memtype="vms")
+        for proc in psutil.process_iter() if proc.username() == username}
+
+
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
@@ -150,12 +155,14 @@ def memory_usage_data_payload(username):
 
     value = []
     for index in process_dict.values():
-        value.append(str(round(index, 2)))
+        value.append(str(round(index, 4)))
 
     data = []
     for index in range(0, len(process_dict.keys())):
         data.append(str(key[index]) + ' ' + str(value[index]) + '\n')
+    #print(data)
     return data
+
 
 def cpu_usage_data_payload(username):
     """
@@ -167,9 +174,11 @@ def cpu_usage_data_payload(username):
     #                proc.username() == username}
     process_dict = {
         "cpu_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "cmdline_process=" + '"' +
-        str('-'.join(proc.cmdline()[0:3])) + '"' + "}": proc.cpu_percent(interval=None) for proc in
+        str(''.join(i for i in str(''.join(
+            proc.cmdline()[0:(len(''.join(proc.cmdline())) if len(str(''.join(proc.cmdline()))) < 8 else 3)])).split(
+            ','))) + '"' + "}": proc.cpu_percent(interval=None) for proc in
         psutil.process_iter() if
-        proc.username() == user_name}
+        proc.username() == username}
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
@@ -181,7 +190,7 @@ def cpu_usage_data_payload(username):
 
     value = []
     for index in process_dict.values():
-        value.append(str(round(index, 2)))
+        value.append(str(round(index, 4)))
 
     data = []
     for index in range(0, len(process_dict.keys())):
