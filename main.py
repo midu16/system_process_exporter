@@ -7,7 +7,7 @@ import requests
 import time
 import psutil,getpass,os
 import argparse
-#import pytest
+import pytest
 import multiprocessing
 
 
