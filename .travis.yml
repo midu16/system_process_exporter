@@ -23,6 +23,3 @@ deploy:
   draft: true
   on:
     tags: true
-  branches:
-    only:
-      v1.01
