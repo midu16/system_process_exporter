@@ -1,0 +1,12 @@
+[Unit]
+Description=Prometheus SystemProcess Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=systemprocess_exporter
+Group=systemprocess_exporter
+ExecStart=$HOME/.config/systemd/user/systemprocess_exporter -pp -e localhost -p 57005
+
+[Install]
+WantedBy=multi-user.target

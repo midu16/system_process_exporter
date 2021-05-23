@@ -7,7 +7,8 @@ import requests
 import time
 import psutil,getpass,os
 import argparse
-#import pytest
+import pytest
+
 import multiprocessing
 
 
@@ -56,11 +57,10 @@ def process_status_data_payload(username):
     process_dict = {
         "process_status" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "cmdline_process=" + '"' +
         str(''.join(i for i in str(''.join(
-            proc.cmdline()[proc.cmdline().index("-ea") + 1
-                           if "-ea" in ''.join(proc.cmdline()) else 0:len(''.join(proc.cmdline()))])).split(
+            proc.cmdline()[0:len(''.join(proc.cmdline())) if (len(''.join(proc.cmdline())) < 8) else (proc.cmdline().index("--field-trial-handle")+1) if "--field-trial-handle" in proc.cmdline() else 3])).split(
             ','))) + '"' + "}": proc.is_running()
         for proc in psutil.process_iter() if proc.username() == username}
-    print(process_dict)
+    #print(process_dict)
     """
         Make sure that the key is of type str. Is generated as dictionary.
             Make sure that the value is of type float. Is generated as dictionary.
@@ -142,8 +142,7 @@ def memory_usage_data_payload(username):
     process_dict = {
         "memory_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "cmdline_process=" + '"' +
         str(''.join(i for i in str(''.join(
-            proc.cmdline()[proc.cmdline().index("-ea") + 1
-                           if "-ea" in ''.join(proc.cmdline()) else 0:len(''.join(proc.cmdline()))])).split(
+            proc.cmdline()[0:len(''.join(proc.cmdline())) if (len(''.join(proc.cmdline())) < 8) else (proc.cmdline().index("--field-trial-handle")+1) if "--field-trial-handle" in proc.cmdline() else 3])).split(
             ','))) + '"' + "}": proc.memory_percent(memtype="vms")
         for proc in psutil.process_iter() if proc.username() == username}
 
@@ -178,8 +177,7 @@ def cpu_usage_data_payload(username):
     process_dict = {
         "cpu_usage" + "{" + "process=" + '"' + str(proc.name()) + '"' + " , " + "cmdline_process=" + '"' +
         str(''.join(i for i in str(''.join(
-            proc.cmdline()[proc.cmdline().index("-ea") + 1
-                           if "-ea" in ''.join(proc.cmdline()) else 0:len(''.join(proc.cmdline()))])).split(
+            proc.cmdline()[0:len(''.join(proc.cmdline())) if (len(''.join(proc.cmdline())) < 8) else (proc.cmdline().index("--field-trial-handle")+1) if "--field-trial-handle" in proc.cmdline() else 3])).split(
             ','))) + '"' + "}": proc.cpu_percent(interval=None) for proc in
         psutil.process_iter() if
         proc.username() == username}
